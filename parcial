@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Parcial2.net.Models;
+using Parcial2.Repositorio;
+
+namespace ParcialAspNetApi.Repositorio
+{
+	public class RpPqr
+	{
+		public User getUserOfRepository(int id)
+		{
+			RpUsers rpUser = new RpUsers();
+			return rpUser.getUser(id);
+		}
+
+		public static List<PQR> _listPqr = new List<PQR>()
+		{
+			new PQR()
+			{
+				idPqr=2,
+				grupoDeInteres="Ciudadano",
+				pais="Colombia",
+				departamento="Atlantico",
+				ciudad="Barranquilla",
+				correo="anthonyjicu2204@gmail.com",
+				medioDeNotificacionPara="email",
+				usuario=new RpUsers().getUser(1),
+				asunto="Test",
+				descripcion="Interconexion de Software"
+			},
+			new PQR()
+			{
+				idPqr=2,
+				grupoDeInteres="Empresa",
+				pais="8438374384",
+				departamento="Otros Departamentos",
+				ciudad="Otra Ciudad",
+				correo="administrador@basyco.co",
+				medioDeNotificacionPara="email",
+				usuario=new RpUsers().getUser(2),
+				asunto="Otra Población ",
+				descripcion="Otra Población"
+			}
+		};
+
+		public IEnumerable<PQR> getPqrs()
+		{
+			return _listPqr;
+		}
+
+		public PQR getPqr(int id)
+		{
+			var pqr = _listPqr.Where(instance => instance.idPqr == id);
+
+			return pqr.FirstOrDefault();
+		}
+
+		public void Agregar(PQR newPqr)
+		{
+			_listPqr.Add(newPqr);
+		}
+
+		public void DeletePqr(PQR pqr)
+		{
+			_listPqr.Remove(pqr);
+		}
+	}
+}
